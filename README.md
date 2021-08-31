@@ -13,3 +13,4 @@ Commands:
   * !win ## - Declare winners on that check
 * As anyone (including user):
   * !bet ## - Bet which position is the winner. (NOTE: Only works while the guessing game is active)
+  * !reminder - Show a reminder of how to bet
