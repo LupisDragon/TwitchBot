@@ -104,5 +104,3 @@ while True:
             irc.send(channel, "@" + name + ", you have already bet correctly. Please wait for the results. Thanks, and good luck!")
         elif (gtactive) and (msg.startswith("!reminder")): #anyone wants a reminder
             irc.send(channel, "Reminder chat! You can get in on the GT guessing game! Just type '!bet ##' (1 - " + str(numchecks) + ") to get your guess in! It'll close when I enter GT, so get those guesses in!")
-        elif (name == botnick) and ("hello" in msg):
-            irc.send(channel, "Hello!")
