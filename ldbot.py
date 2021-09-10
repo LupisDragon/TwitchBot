@@ -45,7 +45,7 @@ while not killbot:
         msgindex = text.index(":") + 1
         msg = text[msgindex:] #grab the rest of the message (the part we actually want)
 
-        chatfile.write(name + ": " + msg + "\n")
+        chatfile.write(name + ": " + msg")
         
         if (name in gtapproved) and (not gtactive) and (msg.startswith("!gt")): #init the guessing game
             print("Setting up GT guessing game.\n")
