@@ -27,8 +27,10 @@ irc.connect(server, port, channel, botnick, botpass)
 
 gtactive = False
 enterednames = [] #this may not be necessary, but just for safety....
+killbot = False #added this so I can close the bot on command
+chatfile = open("lastchat.txt","wt")
 
-while True:
+while not killbot:
     text = irc.get_response()
     print(text)
 
@@ -42,8 +44,10 @@ while True:
         name = text[0:nameend] #gets the name of the sender
         msgindex = text.index(":") + 1
         msg = text[msgindex:] #grab the rest of the message (the part we actually want)
+
+        chatfile.write(name + ": " + msg + "\n")
         
-        if (name == botnick) and (not gtactive) and (msg.startswith("!gt")): #init the guessing game
+        if (name in gtapproved) and (not gtactive) and (msg.startswith("!gt")): #init the guessing game
             print("Setting up GT guessing game.\n")
             enterednames = [] #a list of the names that have guessed
             checks = [] #initialize the empty list of the checks
@@ -61,11 +65,11 @@ while True:
             gtactive = True
             print("Set up complete.")
             irc.send(channel, "All right chat, get your guesses into chat as to where the big key is! Type '!bet ##' (1 - " + str(numchecks) + ") to get your guess in!")
-        elif (name == botnick) and (gtactive) and (msg.startswith("!end")): #end the guessing game
+        elif (name in gtapproved) and (gtactive) and (msg.startswith("!end")): #end the guessing game
             gtactive = False
             print("Guessing game ended")
             irc.send(channel, "Ok chat, guesses are locked in, and there's no more guessing for now! Good luck to all the entrants!")
-        elif (name == botnick) and (not gtactive) and (msg.startswith("!win")): #declare winners
+        elif (name in gtapproved) and (not gtactive) and (msg.startswith("!win")): #declare winners
             try:
                 correct = int(msg[5:7]) - 1
                 print("Winning position (value-1): " + str(correct))
@@ -83,10 +87,10 @@ while True:
                         irc.send(channel, "No one guessed correctly. Better luck next time!")
                         print("No winners this run.")
                 else:
-                    irc.send(channel,"I goofed, and entered something out of range. One moment while I figure this out!")
+                    irc.send(channel, name + " goofed, and entered something out of range. One moment while we figure this out!")
                     print("NUMBER OUT OF RANGE! CHECK CODE IF CORRECT USAGE!")
             except:
-                irc.send(channel,"Oops. something went wrong with the bot command. Give me a moment to figure it out!")
+                irc.send(channel,"Oops. something went wrong with the bot command. Give us a moment to figure it out!")
                 print("TRY BRANCH THREW EXCEPTION. CHECK CODE IF CORRECT USAGE!")
         elif (gtactive) and (msg.startswith("!bet")) and (name not in enterednames): #someone is betting for the first time
             try:
@@ -104,3 +108,6 @@ while True:
             irc.send(channel, "@" + name + ", you have already bet correctly. Please wait for the results. Thanks, and good luck!")
         elif (gtactive) and (msg.startswith("!reminder")): #anyone wants a reminder
             irc.send(channel, "Reminder chat! You can get in on the GT guessing game! Just type '!bet ##' (1 - " + str(numchecks) + ") to get your guess in! It'll close when I enter GT, so get those guesses in!")
+        elif (name == botnick) and (msg == '!killbot'):
+            killbot = True
+chatfile.close()
