@@ -4,8 +4,10 @@ A special bot I created for my twitch channel. Plays the GT guessing game on my 
 The "fakesettings.py" file would need to be re-named to "settings.py" for the code to work.
 Also, the first three lines in "fakesettings.py" need to be changed. The lines are for example only.
 
+The last line in the file will allow for multiple people to start, stop, and announce winners for the gt guessing game.
+
 Commands:
-* As an approved person (see fakesettings):
+* As an approved person:
   * !gt - Start standard GT guessing game
   * !gt mc - Start GT guessing game, where maps/compasses are shuffled
   * !gt mcs - Start GT guessing game, where maps/compasses/small keys are shuffled
