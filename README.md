@@ -5,7 +5,7 @@ The "fakesettings.py" file would need to be re-named to "settings.py" for the co
 Also, the first three lines in "fakesettings.py" need to be changed. The lines are for example only.
 
 Commands:
-* As user:
+* As an approved person (see fakesettings):
   * !gt - Start standard GT guessing game
   * !gt mc - Start GT guessing game, where maps/compasses are shuffled
   * !gt mcs - Start GT guessing game, where maps/compasses/small keys are shuffled
@@ -14,3 +14,5 @@ Commands:
 * As anyone (including user):
   * !bet ## - Bet which position is the winner. (NOTE: Only works while the guessing game is active)
   * !reminder - Show a reminder of how to bet
+* As the user:
+  * !killbot - ends the bot
