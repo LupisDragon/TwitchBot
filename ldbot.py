@@ -1,5 +1,4 @@
 '''
-This program was created by Ian Schwartz
 What it does:
     * Connect to twitch using IRC
     * Joins my channel
