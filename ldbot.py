@@ -1,4 +1,5 @@
 '''
+Written by LupisDragon
 What it does:
     * Connect to twitch using IRC
     * Joins my channel
